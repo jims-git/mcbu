@@ -10,11 +10,15 @@
 # mkdir -p ~/minecraft/bu/hourly
 # mkdir -p ~/minecraft/scripts
 
+# First run of the server setup (drag jar file into mincraft directory):
+# java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/minecraft_server_1.20.2.jar nogui
+# This will setup the environment, and fail. You will need to edit the eula.txt
+
 # Make a file called run.sh:
 #      nano ~/minecraft/scripts/run.sh
 # add the following text:
 #      #!/bin/bash
-#      java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/versions/minecraft_server_1.20.2.jar nogui
+#      java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/versions/1.20.2/server_1.20.2.jar nogui
 
 # Now make run.sh executable : chmod +x run.sh
 
@@ -40,8 +44,8 @@
 # ├── server.properties
 # ├── usercache.json
 # ├── versions
-# │   ├── minecraft_server_1.19.3.jar
-# │   └── minecraft_server_1.20.2.jar
+# │   └── 1.20.2
+# │       └── server_1.20.2.jar
 # ├── whitelist.json
 # └── world
 
@@ -69,12 +73,11 @@
 # 0 * * * * /home/<USERNAME>/minecraft/scripts/mcbu.sh -c > /dev/null
 
 
-# Uncomment the version you want to run,
-# or comment out all and add a new version
-#SERVER_JAR_NAME=minecraft_server_1.19.3.jar
-SERVER_JAR_NAME=minecraft_server_1.20.2.jar
+SERVER_VERSION=1.20.2
+SERVER_JAR_NAME=server_${SERVER_VERSION}.jar
 
-SERVER_PATH=~/minecraft/versions      # path to all server versions
+SERVER_PATH=~/minecraft/versions/${SERVER_VERSION}/
+
 SCREEN_NAME=Server1                   # Name of SCREEN session
 BU_HOURLY_PATH=~/minecraft/bu/hourly  # Where the HOURLY backups will be stored
 BU_DAILY_PATH=~/minecraft/bu/daily    # Where the DAILY backups will be stored
