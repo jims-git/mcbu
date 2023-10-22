@@ -6,12 +6,13 @@
 # Make this file executable :   chmod +x mcbu.sh
 
 # make sure to add the following directories:
+# mkdir ~/minecraft
 # mkdir -p ~/minecraft/bu/daily
 # mkdir -p ~/minecraft/bu/hourly
 # mkdir -p ~/minecraft/scripts
 
 # First run of the server setup (drag jar file into mincraft directory):
-# java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/minecraft_server_1.20.2.jar nogui
+# java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/server.jar nogui
 # This will setup the environment, and fail. You will need to edit the eula.txt
 
 # Make a file called run.sh:
@@ -61,6 +62,8 @@
 # Use <ctrl>-a d to exit the screen
 #
 #  to reconnect to this screen, type :   > screen -r
+#
+#  to stop the server while in screen    > /stop
 
 
 # Don't forget to add a new crontab to make this script run hourly
