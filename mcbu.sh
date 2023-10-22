@@ -3,6 +3,7 @@
 # Minecraft Server backup script
 # This script will make hourly backups, as well as daily backps that will go back 30 days.
 # Make sure to find/replace <USERNAME> with your actual username.
+# Make this file executable :   chmod +x mcbu.sh
 
 # make sure to add the following directories:
 # mkdir -p ~/minecraft/bu/daily
