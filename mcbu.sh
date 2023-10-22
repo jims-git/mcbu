@@ -19,7 +19,7 @@
 #      nano ~/minecraft/scripts/run.sh
 # add the following text:
 #      #!/bin/bash
-#      java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/versions/1.20.2/server_1.20.2.jar nogui
+#      java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/versions/1.20.2/server-1.20.2.jar nogui
 
 # Now make run.sh executable : chmod +x run.sh
 
@@ -77,7 +77,7 @@
 
 
 SERVER_VERSION=1.20.2
-SERVER_JAR_NAME=server_${SERVER_VERSION}.jar
+SERVER_JAR_NAME=server-${SERVER_VERSION}.jar
 
 SERVER_PATH=~/minecraft/versions/${SERVER_VERSION}/
 
