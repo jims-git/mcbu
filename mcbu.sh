@@ -11,15 +11,20 @@
 # mkdir -p ~/minecraft/bu/hourly
 # mkdir -p ~/minecraft/scripts
 
-# First run of the server setup (drag jar file into mincraft directory):
-# java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/server.jar nogui
+# First run of the server setup :
+# Rename it : mv server.jar minecraft/server-1.20.2.jar
+# cd minecraft
+# java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/server-1.20.2.jar nogui
 # This will setup the environment, and fail. You will need to edit the eula.txt
+# Re-run : java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/server-1.20.2.jar nogui
+# When you see the word "Done", exit server with /stop
+
 
 # Make a file called run.sh:
 #      nano ~/minecraft/scripts/run.sh
 # add the following text:
 #      #!/bin/bash
-#      java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/versions/1.20.2/server-1.20.2.jar nogui
+#      java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/server-1.20.2.jar nogui
 
 # Now make run.sh executable : chmod +x run.sh
 
@@ -76,10 +81,7 @@
 # 0 * * * * /home/<USERNAME>/minecraft/scripts/mcbu.sh -c > /dev/null
 
 
-SERVER_VERSION=1.20.2
-SERVER_JAR_NAME=server-${SERVER_VERSION}.jar
-
-SERVER_PATH=~/minecraft/versions/${SERVER_VERSION}/
+SERVER_JAR_NAME=server-1.20.2.jar
 
 SCREEN_NAME=Server1                   # Name of SCREEN session
 BU_HOURLY_PATH=~/minecraft/bu/hourly  # Where the HOURLY backups will be stored
