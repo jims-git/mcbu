@@ -11,23 +11,25 @@
 # mkdir -p ~/minecraft/bu/hourly
 # mkdir -p ~/minecraft/scripts
 
-# First run of the server setup :
-# Rename it : mv server.jar minecraft/server-1.20.2.jar
-# cd minecraft
-# java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/server-1.20.2.jar nogui
-# This will setup the environment, and fail. You will need to edit the eula.txt
-# Re-run : java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/server-1.20.2.jar nogui
-# When you see the word "Done", exit server with /stop
+# FIRST run of the server setup :
+# cd ~/minecraft
+# java -Xmx1024M -Xms1024M -jar server.jar nogui
+# This will setup the environment, and FAIL. You will need to edit the eula.txt
+#       nano eula.txt
+#       change false to true
+# Re-run : java -Xmx1024M -Xms1024M -jar server.jar nogui
+# When you see the word "Done", the server is running.
+#
+# to kill the server: /stop
 
 
 # Make a file called run.sh:
 #      nano ~/minecraft/scripts/run.sh
 # add the following text:
 #      #!/bin/bash
-#      java -Xmx1024M -Xms1024M -jar /home/<USERNAME>/minecraft/server-1.20.2.jar nogui
-
+#      cd ~/minecraft
+#      java -Xmx1024M -Xms1024M -jar server.jar nogui
 # Now make run.sh executable : chmod +x run.sh
-
 # Place run.sh and mcbu.sh(this file) into the scripts folder.
 
 # Folder Structure
@@ -47,28 +49,27 @@
 # ├── scripts
 # │   ├── mcbu.sh
 # │   └── run.sh
+# ├── server.jar
 # ├── server.properties
 # ├── usercache.json
 # ├── versions
-# │   └── 1.20.2
-# │       └── server_1.20.2.jar
 # ├── whitelist.json
 # └── world
 
 
 # To start the SERVER
-# Make sure to launch screen with a name
+# Make sure to launch SCREEN with a name
 # ie:
 #     > screen -R Server1
 #           wait until new screen opens
-#     > cd minecraft/scripts
+#     > cd ~/minecraft/scripts
 #     > ./run.sh
 #
 # Use <ctrl>-a d to exit the screen
 #
-#  to reconnect to this screen, type :   > screen -r
+#  to reconnect to this screen, type :     > screen -r
 #
-#  to stop the server while in screen    > /stop
+#  to stop the server, while in screen:    > /stop
 
 
 # Don't forget to add a new crontab to make this script run hourly
@@ -81,7 +82,7 @@
 # 0 * * * * /home/<USERNAME>/minecraft/scripts/mcbu.sh -c > /dev/null
 
 
-SERVER_JAR_NAME=server-1.20.2.jar
+SERVER_JAR_NAME=server.jar
 
 SCREEN_NAME=Server1                   # Name of SCREEN session
 BU_HOURLY_PATH=~/minecraft/bu/hourly  # Where the HOURLY backups will be stored
@@ -96,9 +97,9 @@ echo "Minecraft Server is not running, not backing up."
 exit 1
 else
 # Let users know of the backup and turn off world saving temporarily
-screen -R ${SCREEN_NAME} -X stuff "say Backup starting. World no longer saving... $(printf '\r')"
-screen -R ${SCREEN_NAME} -X stuff "save-off $(printf '\r')"
-screen -R ${SCREEN_NAME} -X stuff "save-all $(printf '\r')"
+screen -R ${SCREEN_NAME} -X stuff "/say Backup starting. World no longer saving... $(printf '\r')"
+screen -R ${SCREEN_NAME} -X stuff "/save-off $(printf '\r')"
+screen -R ${SCREEN_NAME} -X stuff "/save-all $(printf '\r')"
 sleep 3
 
 # change working directory to the hourly backup folder
@@ -127,8 +128,8 @@ fi
 find ${BU_DAILY_PATH} -type f -mtime +30 -exec rm -f {} \;
 
 # Let users know the backup is done and re-enable world saving. Also relay the time, because why not.
-screen -R ${SCREEN_NAME} -X stuff "save-on $(printf '\r')"
-screen -R ${SCREEN_NAME} -X stuff "say Backup complete. World now saving. $(printf '\r')"
+screen -R ${SCREEN_NAME} -X stuff "/save-on $(printf '\r')"
+screen -R ${SCREEN_NAME} -X stuff "/say Backup complete. World now saving. $(printf '\r')"
 printf "\nBackup Complete.\n"
 
 fi
